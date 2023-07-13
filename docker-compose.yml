@@ -1,0 +1,23 @@
+version: "3"
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - nginx_network
+
+  web:
+    build: ./web
+    container_name: web
+    ports:
+      - 5000:5000
+    networks:
+      - nginx_network 
+  
+networks:
+  nginx_network:
+    driver: bridge
